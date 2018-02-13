@@ -22,46 +22,38 @@ export function Todo(props) {
         return <strike>{todo.text}</strike>;
     } else {
         return <span>{todo.text}</span>;
-        // return <span></span>;
     }
 }
 
 export function TodoList(props) {
+    /* all props in container */
     const {todos, toggleTodo, addTodo, deleteTodo} = props;
 
 
-    const onSubmit = (event) => {
-        const input = event.target;
+    const onSubmit = (e) => {
+        const input = e.target;
         const text = input.value;
-        const isEnterKey = (event.which === 13);
-        const isLongEnough = text.length > 0;
 
-        if (isEnterKey && isLongEnough) {
+        if (e.which === 13) {
             input.value = '';
             addTodo(text);
         }
     };
 
-    const toggleClick = id => event => toggleTodo(id);
-    const deleteClick = id => event => deleteTodo(id);
-
     return (
-        <div className='todo'>
+        <div>
 
+            <h1>ToDos App</h1>
             <input type='text'
-                   className='todo__entry'
                    placeholder='Add todo'
                    onKeyDown={onSubmit}/>
-            <button type="submit"> Add Todo</button>
-            {/*should be added from*/}
 
-            <ul className='todo__list'>
-                {todos.map(rec => (
-
-                    <li key={rec.get('id')} className='todo__item'>
-                        <input type="checkbox" onChange={toggleClick(rec.get('id'))}/>
-                        <input type="checkbox" onChange={deleteClick(rec.get('id'))}/>
-                        <Todo todo={rec.toJS()}/>
+            <ul>
+                {todos.map(t => (
+                    <li key={t.get('id')} className='todo__item'>
+                        <input type="checkbox" onChange={() => toggleTodo(t.get('id'))}/>
+                        <input type="checkbox" onChange={() => deleteTodo(t.get('id'))}/>
+                        <Todo todo={t.toJS()}/>
                     </li>
 
                 ))}

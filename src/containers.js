@@ -18,10 +18,16 @@ import {connect} from "react-redux";
 import * as components from "./components";
 import {addTodo, deleteTodo, toggleTodo} from "./actions";
 
-export const TodoList = connect(
+/**
+ * generate container component
+ */
+export const Container = connect(
+    /* State --> Props */
     function mapStateToProps(state) {
         return {todos: state};
     },
+
+    /* Dispatch --> Props */
     function mapDispatchToProps(dispatch) {
         return {
             addTodo: text => dispatch(addTodo(text)),
@@ -30,4 +36,6 @@ export const TodoList = connect(
         };
     }
 )(components.TodoList);
+
+
 
