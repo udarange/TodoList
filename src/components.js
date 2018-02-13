@@ -19,9 +19,9 @@ import React from "react";
 export function Todo(props) {
     const {todo} = props;
     if (todo.isDone) {
-        return <strike>{todo.text}</strike>;
+        return <strike> {todo.text} </strike>;
     } else {
-        return <span>{todo.text}</span>;
+        return <span> {todo.text} </span>;
     }
 }
 
@@ -45,17 +45,19 @@ export function TodoList(props) {
 
             <h1>ToDos App</h1>
             <input type='text'
-                   placeholder='Add todo'
+                   placeholder='Add Todo'
                    onKeyDown={onSubmit}/>
 
+            <h3>Show Todo List</h3>
             <ul>
-                {todos.map(t => (
-                    <li key={t.get('id')} className='todo__item'>
-                        <input type="checkbox" onChange={() => toggleTodo(t.get('id'))}/>
-                        <input type="checkbox" onChange={() => deleteTodo(t.get('id'))}/>
-                        <Todo todo={t.toJS()}/>
+                {todos.map((t,id) => (
+                    <li key={id} >
+                        <button onClick={() => toggleTodo(t.id)}>Done</button>
+                        <button onClick={() => deleteTodo(t.id)}>Delete</button>
+                        {/*<input type="checkbox" onChange={() => toggleTodo(t.id)}/>*/}
+                        {/*<input type="checkbox" onChange={() => deleteTodo(t.id)}/>*/}
+                        <Todo todo={t}/>
                     </li>
-
                 ))}
             </ul>
 

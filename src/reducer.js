@@ -15,23 +15,27 @@
  */
 
 import React from 'react';
-import {List, Map} from "immutable";
 
-const init = List([]);
-
-export default function reducer(todos = init, action) {
+export default function reducer(todos = [], action) {
     switch (action.type) {
         case 'ADD':
             console.log("REDUCER ---> add")
-            return todos.push(Map(action.payload));
+            console.log(todos);
+            return [
+                ...todos,
+                {
+                    id : action.id,
+                    text : action.text,
+                    isDone : false
+                }
+            ];
 
         case 'TOGGLE':
             console.log("REDUCER ---> toggle")
-            // todos.map(e => console.log(e.toJS()))
-
             return todos.map(t => {
-                if (t.get('id') === action.payload) {
-                    return t.update('isDone', isDone => !isDone);
+                if (t.id === action.id) {
+                    t.isDone = !t.isDone;
+                    return t;
                 } else {
                     return t;
                 }
@@ -39,7 +43,7 @@ export default function reducer(todos = init, action) {
 
         case 'DELETE':
             console.log("REDUCER ---> delete")
-            return todos.filter((t) => t.get('id') !== action.payload)
+            return todos.filter(t => t.id !== action.id)
 
         default:
             return todos;

@@ -19,24 +19,21 @@ let nextTodoId = 0
 export function addTodo(text) {
     return {
         type: 'ADD',
-        payload: {
-            id: nextTodoId++,
-            isDone: false,
-            text: text
-        }
+        id: nextTodoId++,
+        text
     };
 }
 
 export function toggleTodo(id) {
     return {
         type: 'TOGGLE',
-        payload: id
+        id
     };
 }
 
 export function deleteTodo(id) {
     return {
         type: 'DELETE',
-        payload: id
+        id
     };
 }
