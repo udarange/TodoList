@@ -20,7 +20,7 @@ import {deleteTodo, toggleTodo} from "../Action/actions";
 export function Todo(props) {
     const {todo} = props;
     if (todo.isDone) {
-        return <strike> {todo.text} </strike>;
+        return <strike> <font color="LightGrey">{text}</font> </strike>;
     } else {
         return <span> {todo.text} </span>;
     }
@@ -28,7 +28,7 @@ export function Todo(props) {
 
 let showTodoList = ({todos, toggleTodo, deleteTodo}) => (
     <div>
-        <h3>Show Todo List: {todos.length} items</h3>
+        <h3>Show Todo List: <font color="red">{todos.length}</font> items</h3>
         <ul>
             {todos.map((t, id) => (
                 <li key={id}>

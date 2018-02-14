@@ -20,7 +20,7 @@ import { addTodo } from '../Action/actions'
 
 let AddTodoList = ({dispatch}) => (
     <div>
-        <h1>ToDos App</h1>
+        <h1><font color="brown">ToDos App</font></h1>
         <input type='text'
                placeholder='Add Todo'
                onKeyDown={e => {
