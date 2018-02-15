@@ -19,23 +19,19 @@ import {deleteTodo, toggleTodo} from "../Action/actions";
 
 export function Todo(props) {
     const {todo} = props;
-    if (todo.isDone) {
-        return <strike> <font color="LightGrey">{text}</font> </strike>;
-    } else {
-        return <span> {todo.text} </span>;
-    }
+    return todo.isDone ?
+        <strike> <font color="LightGrey">{todo.text}</font> </strike>:
+        <span> {todo.text} </span>
 }
 
 let showTodoList = ({todos, toggleTodo, deleteTodo}) => (
     <div>
         <h3>Show Todo List: <font color="red">{todos.length}</font> items</h3>
         <ul>
-            {todos.map((t, id) => (
-                <li key={id}>
+            {todos.map((t) => (
+                <li key={t.id}>
                     <button onClick={() => toggleTodo(t.id)}>Done</button>
                     <button onClick={() => deleteTodo(t.id)}>Delete</button>
-                    {/*<input type="checkbox" onChange={() => toggleTodo(t.id)}/>*/}
-                    {/*<input type="checkbox" onChange={() => deleteTodo(t.id)}/>*/}
                     <Todo todo={t}/>
                 </li>
             ))}
@@ -43,17 +39,18 @@ let showTodoList = ({todos, toggleTodo, deleteTodo}) => (
     </div>
 );
 
-showTodoList = connect(
-    /* State --> Props */
-    (state) => ({
-        todos: state
-    }),
+/* State --> Props */
+const mapStateToProps = (state) => ({
+    todos: state
+});
 
-    /* Dispatch --> Props */
-    (dispatch) => ({
-        toggleTodo: id => dispatch(toggleTodo(id)),
-        deleteTodo: id => dispatch(deleteTodo(id))
-    })
-)(showTodoList)
+/* Dispatch --> Props */
+const mapDispatchToProps = (dispatch) => ({
+    toggleTodo: id => dispatch(toggleTodo(id)),
+    deleteTodo: id => dispatch(deleteTodo(id))
+});
+
+/* generating container component */
+showTodoList = connect(mapStateToProps, mapDispatchToProps)(showTodoList)
 export default showTodoList
 
