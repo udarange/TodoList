@@ -14,7 +14,7 @@
  * Created by archana on 2/9/18.
  */
 
-import React from 'react';
+import React from "react";
 
 export default function reducer(todos = [], action) {
     switch (action.type) {
@@ -24,9 +24,9 @@ export default function reducer(todos = [], action) {
             return [
                 ...todos,
                 {
-                    id : action.id,
-                    text : action.text,
-                    isDone : false
+                    id: action.id,
+                    text: action.text,
+                    isDone: false
                 }
             ];
 
@@ -36,9 +36,8 @@ export default function reducer(todos = [], action) {
                 if (t.id === action.id) {
                     t.isDone = !t.isDone;
                     return t;
-                } else {
-                    return t;
                 }
+                return t;
             });
 
         case 'DELETE':
