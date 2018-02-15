@@ -35,6 +35,7 @@ let AddTodoList = ({dispatch}) => (
     </div>
 );
 
+/* generating container component */
 AddTodoList = connect()(AddTodoList)
 export default AddTodoList
 
